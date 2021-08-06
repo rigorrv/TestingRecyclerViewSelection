@@ -2,12 +2,14 @@ package com.example.testingrecyclerviewselection
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.selection.*
 import androidx.recyclerview.widget.*
+import com.example.testingrecyclerviewselection.propiedadesadapter.LocalItemDetailsLookup
+import com.example.testingrecyclerviewselection.propiedadesadapter.PropidadesAdapter
+import com.example.testingrecyclerviewselection.propiedadesadapter.ViewItem
 import kotlinx.android.synthetic.main.testselection.*
 import timber.log.Timber
 
@@ -70,17 +72,5 @@ class FragmentoPropiedadesCompRenta : Fragment() {
             items.add(ViewItem.NumberItem(number.toString()))
         }
         adapter.submitList(items)
-    }
-
-    private class LocalItemDetailsLookup(private val recyclerView: RecyclerView) :
-        ItemDetailsLookup<Long>() {
-        override fun getItemDetails(event: MotionEvent): ItemDetails<Long>? {
-            val view = recyclerView.findChildViewUnder(event.x, event.y)
-            if (view != null) {
-                return (recyclerView.getChildViewHolder(view) as ViewHolder)
-                    .getItemDetails()
-            }
-            return null
-        }
     }
 }

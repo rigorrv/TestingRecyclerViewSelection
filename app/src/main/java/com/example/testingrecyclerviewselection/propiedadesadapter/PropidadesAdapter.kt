@@ -1,4 +1,4 @@
-package com.example.testingrecyclerviewselection
+package com.example.testingrecyclerviewselection.propiedadesadapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -22,7 +22,6 @@ class PropidadesAdapter() : ListAdapter<ViewItem, ViewHolder>(DiffCallback()) {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        Timber.d("position=$position, selected=${tracker.isSelected(position.toLong())}, selection=${tracker.selection}")
         holder.bind(getItem(position), tracker.isSelected(position.toLong()))
     }
 }
