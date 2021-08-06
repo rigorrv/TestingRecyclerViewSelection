@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.testingrecyclerviewselection.R
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.direction_items.view.*
+import kotlinx.android.synthetic.main.item_row.view.*
 import kotlinx.android.synthetic.main.testselection_item.view.*
 
 class ViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView),
@@ -16,10 +17,14 @@ class ViewHolder(override val containerView: View) : RecyclerView.ViewHolder(con
     fun bind(item: ViewItem, isSelected: Boolean) {
         when (item) {
             is ViewItem.NumberItem -> {
-                itemView.numberTextView.text = item.id
+                itemView.precioRecyclerTxt.text = "$8000"
+                itemView.direccionRecyclerTxt.text = "Villas del Palmar"
+                itemView.masInfoBtn.text = "Info aqui"
+                itemView.houseIcon.setBackgroundResource(R.drawable.house0001)
                 val res =
-                    if (isSelected) R.color.itemActivate else R.color.itemDisable
-                itemView.setBackgroundResource(res)
+                    if (isSelected) View.VISIBLE else View.GONE
+                itemView.infoIcono.visibility = res
+                itemView.masInfoBtn.visibility = res
             }
         }
     }
