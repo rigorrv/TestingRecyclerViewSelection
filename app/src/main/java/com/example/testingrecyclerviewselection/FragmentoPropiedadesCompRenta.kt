@@ -1,6 +1,8 @@
 package com.example.testingrecyclerviewselection
 
+import android.R.attr
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +14,7 @@ import com.example.testingrecyclerviewselection.propiedadesadapter.LocalItemDeta
 import com.example.testingrecyclerviewselection.propiedadesadapter.PropidadesAdapter
 import com.example.testingrecyclerviewselection.propiedadesadapter.ViewItem
 import kotlinx.android.synthetic.main.testselection.*
-import timber.log.Timber
+
 
 class FragmentoPropiedadesCompRenta : Fragment() {
     private lateinit var adapter: PropidadesAdapter
@@ -48,9 +50,9 @@ class FragmentoPropiedadesCompRenta : Fragment() {
                 StorageStrategy.createLongStorage()
             ).withSelectionPredicate(object : SelectionTracker.SelectionPredicate<Long>() {
                 override fun canSetStateForKey(key: Long, nextState: Boolean): Boolean {
-                    selection = key.toInt()
-                    if (selection == key.toInt())
-                        Toast.makeText(context, "$key", Toast.LENGTH_SHORT).show()
+                    if (nextState == false) {
+                        Toast.makeText(context, "Next Fragment", Toast.LENGTH_SHORT).show()
+                    }
                     return true
                 }
 
@@ -62,14 +64,8 @@ class FragmentoPropiedadesCompRenta : Fragment() {
                     return false // Set to false to allow single selecting
                 }
             }).build()
-            adapter.tracker = tracker
 
-            tracker.addObserver(object : SelectionTracker.SelectionObserver<Long>() {
-                override fun onSelectionChanged() {
-                    super.onSelectionChanged()
-                    Timber.d("selection=${tracker.selection}")
-                }
-            })
+            adapter.tracker = tracker
         }
 
         val items = mutableListOf<ViewItem>()
