@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.selection.*
 import androidx.recyclerview.widget.*
@@ -15,6 +16,7 @@ import timber.log.Timber
 
 class FragmentoPropiedadesCompRenta : Fragment() {
     private lateinit var adapter: PropidadesAdapter
+    private var selection = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,6 +48,9 @@ class FragmentoPropiedadesCompRenta : Fragment() {
                 StorageStrategy.createLongStorage()
             ).withSelectionPredicate(object : SelectionTracker.SelectionPredicate<Long>() {
                 override fun canSetStateForKey(key: Long, nextState: Boolean): Boolean {
+                    selection = key.toInt()
+                    if (selection == key.toInt())
+                        Toast.makeText(context, "$key", Toast.LENGTH_SHORT).show()
                     return true
                 }
 
